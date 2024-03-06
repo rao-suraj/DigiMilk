@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "349278923821",
+    "firebase_url": "https://doodh-1a108-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "doodh-1a108",
+    "storage_bucket": "doodh-1a108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349278923821:android:3042bb45e23a8d54531ca4",
+        "android_client_info": {
+          "package_name": "com.example.dhood_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMgD04Glt5PO6YxjnG9xm8QECwZLLVUls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349278923821:android:26341afc7d0426b4531ca4",
+        "android_client_info": {
+          "package_name": "com.example.doodh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMgD04Glt5PO6YxjnG9xm8QECwZLLVUls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
