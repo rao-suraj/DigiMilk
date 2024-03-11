@@ -1,36 +1,40 @@
-import 'package:dhood_app/data/data_source/remote/firebase_database.dart';
-import 'package:dhood_app/presentation/screen/dairy_dashboard/dairy_dashboard_screen.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:dhood_app/data/utils/app_error.dart';
+import 'package:dhood_app/di/get_it.dart';
+import 'package:dhood_app/domain/repository/dairy_worker_repository.dart';
+import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/theme/app_theme.dart';
+import 'package:either_dart/either.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  configureDependencies();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final _appRouter = AppRouter(); 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _appRouter.config(),
       title: 'Flutter Demo',
       theme: AppThemes.lightheme(context),
       darkTheme: AppThemes.darkTheme(context),
       themeMode: ThemeMode.system,
-      home: DairyDashboard(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  final String title;
+@RoutePage()
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -47,12 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Text("$data"),
             TextButton(
-                onPressed: () {
-                  FirebaseDatabaseService().getSensorDataStream().listen((event) {
-                    setState(() {
-                      data = event.snapshot.value.toString();
-                    });
-                  });
+                onPressed: () async {
+                  final Either<AppError, void> response =
+                      await getIt<IDairyWorkerRepository>()
+                          .dairyWorkerLogin(id: 'id01', password: '12345');
+                  response.fold((left) => print(left.message),
+                      (right) => print("success"));
                 },
                 child: const Text("Click")),
           ],
@@ -61,4 +65,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-

@@ -1,10 +1,16 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dhood_app/di/get_it.dart';
+import 'package:dhood_app/presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart';
+import 'package:dhood_app/presentation/cubit/dairy_login_cubit/dairy_login_state.dart';
+import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_button.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_textfield.dart';
 import 'package:dhood_app/presentation/screen/widget/square_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DairyLoginPage extends StatelessWidget {
+@RoutePage()
+class DairyLoginPage extends StatelessWidget implements AutoRouteWrapper {
   DairyLoginPage({super.key});
 
   // text editing controllers
@@ -12,7 +18,6 @@ class DairyLoginPage extends StatelessWidget {
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {}
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +61,7 @@ class DairyLoginPage extends StatelessWidget {
                           children: [
                             CustomTextfield(
                               controller: usernameController,
-                              hintText: 'Username',
+                              hintText: 'User Id',
                               obscureText: false,
                             ),
                             const SizedBox(height: 10),
@@ -65,7 +70,9 @@ class DairyLoginPage extends StatelessWidget {
                               hintText: 'Password',
                               obscureText: true,
                             ),
-                            const SizedBox(height: 4,),
+                            const SizedBox(
+                              height: 4,
+                            ),
                             Align(
                               alignment: Alignment.centerRight,
                               child: Text(
@@ -76,8 +83,37 @@ class DairyLoginPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        CustomButton(
-                          onTap: signUserIn,
+                        BlocConsumer<DairyLoginCubit, DairyLoginState>(
+                          listener: (context, state) {
+                            if (state is DairyLoginError) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(state.message, style:const TextStyle(color: Colors.white),),
+                                  duration: const Duration(seconds: 3),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            } else if (state is DairyLoginSuccrss) {
+                              context.replaceRoute(const DairyDashboardRoute());
+                            }
+                          },
+                          builder: (context, state) {
+                            if (state is DairyLoginLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return CustomButton(
+                                onTap: () {
+                                  context
+                                      .read<DairyLoginCubit>()
+                                      .dairyWorkerLogin(
+                                          id: usernameController.text,
+                                          password: passwordController.text);
+                                },
+                              );
+                            }
+                          },
                         ),
                         Row(
                           children: [
@@ -144,6 +180,14 @@ class DairyLoginPage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<DairyLoginCubit>(),
+      child: this,
     );
   }
 }

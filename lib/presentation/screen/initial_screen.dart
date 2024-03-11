@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
 
@@ -10,37 +13,47 @@ class InitialScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 60,
-            child: Container(),
+            flex: 50,
+            child: Center(
+              child: Image.asset(
+                "assets/images/welcome_back.png",
+                height: 140,
+              ),
+              // child: Container(),
+            ),
           ),
           Expanded(
-              flex: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.surface,
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        "Dairy Worker",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary),
-                      )),
-                  TextButton(
+            flex: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.surface,
+                      // maximumSize: const Size(50, 50)
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushRoute(DairyLoginRoute());
+                    },
                     child: Text(
-                      "Farmer",
+                      "Dairy Worker",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary),
-                    ),
-                  )
-                ],
-              ))
+                    )),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    "Farmer",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

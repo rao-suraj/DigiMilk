@@ -1,16 +1,18 @@
 
+import 'package:auto_route/annotations.dart';
 import 'package:dhood_app/presentation/screen/widget/grid_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DairyDashboard extends StatefulWidget {
-  const DairyDashboard({super.key});
+@RoutePage()
+class DairyDashboardScreen extends StatefulWidget {
+  const DairyDashboardScreen({super.key});
 
   @override
   DairyDashboardState createState() => DairyDashboardState();
 }
 
-class DairyDashboardState extends State<DairyDashboard> {
+class DairyDashboardState extends State<DairyDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final appTheme= Theme.of(context);

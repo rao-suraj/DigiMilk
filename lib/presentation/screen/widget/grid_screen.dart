@@ -33,7 +33,7 @@ class GridScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     final appBrightmess = MediaQuery.of(context).platformBrightness;
-    List<Items> myList = [item1, item2, item3,item4];
+    List<Items> myList = [item1, item2, item3, item4];
 
     return GridView.count(
         childAspectRatio: 1.0,
@@ -42,62 +42,73 @@ class GridScreen extends StatelessWidget {
         crossAxisSpacing: 18,
         mainAxisSpacing: 18,
         children: myList.map((data) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background.withOpacity(0.97),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: appBrightmess == Brightness.dark
-                      ? Colors.black.withOpacity(0.2)
-                      : Colors.grey.shade300, // shadow color
-                  spreadRadius: 5, // spread radius
-                  blurRadius: 7, // blur radius
-                  offset: const Offset(0, 4), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  data.img,
-                  width: 42,
-                ),
-                const SizedBox(
-                  height: 14,
-                ),
-                Text(
-                  data.title,
-                  style: GoogleFonts.openSans(
-                      textStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600)),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  data.subtitle,
-                  style: GoogleFonts.openSans(
-                      textStyle: TextStyle(
-                          color: appTheme.colorScheme.onSecondary,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600)),
-                ),
-                const SizedBox(
-                  height: 14,
-                ),
-                Text(
-                  data.event,
-                  style: GoogleFonts.openSans(
-                      textStyle: TextStyle(
-                          color: appTheme.colorScheme.onSecondary,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600)),
-                ),
-              ],
+          return InkWell(
+            onTap: () {
+              switch (data.title) {
+                case "Dairy Details":
+                  print(data.title);
+                case "Add Farmers":
+                  print(data.title);
+              }
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).colorScheme.background.withOpacity(0.97),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: appBrightmess == Brightness.dark
+                        ? Colors.black.withOpacity(0.2)
+                        : Colors.grey.shade300, // shadow color
+                    spreadRadius: 5, // spread radius
+                    blurRadius: 7, // blur radius
+                    offset: const Offset(0, 4), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    data.img,
+                    width: 42,
+                  ),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                  Text(
+                    data.title,
+                    style: GoogleFonts.openSans(
+                        textStyle: TextStyle(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    data.subtitle,
+                    style: GoogleFonts.openSans(
+                        textStyle: TextStyle(
+                            color: appTheme.colorScheme.onSecondary,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                  Text(
+                    data.event,
+                    style: GoogleFonts.openSans(
+                        textStyle: TextStyle(
+                            color: appTheme.colorScheme.onSecondary,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                ],
+              ),
             ),
           );
         }).toList());
