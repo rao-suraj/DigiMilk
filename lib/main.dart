@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:dhood_app/data/utils/app_error.dart';
 import 'package:dhood_app/di/get_it.dart';
-import 'package:dhood_app/domain/repository/dairy_worker_repository.dart';
+import 'package:dhood_app/domain/repository/farmer_repository.dart';
 import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/theme/app_theme.dart';
 import 'package:either_dart/either.dart';
@@ -16,8 +16,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final _appRouter = AppRouter();
   MyApp({super.key});
-  final _appRouter = AppRouter(); 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 @RoutePage()
 class MyHomePage extends StatefulWidget {
@@ -53,10 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
                 onPressed: () async {
                   final Either<AppError, void> response =
-                      await getIt<IDairyWorkerRepository>()
-                          .dairyWorkerLogin(id: 'id01', password: '12345');
+                      await getIt<IFarmerRepository>()
+                          .farmerLogin(id: 'fid001', password: '12221');
                   response.fold((left) => print(left.message),
                       (right) => print("success"));
+                  // FirebaseDatabase.instance
+                  //     .ref('farmer/' + 'fid001')
+                  //     .set({'name': "Raj", 'password': '12221'});
                 },
                 child: const Text("Click")),
           ],

@@ -44,7 +44,9 @@ class InitialScreen extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.surface,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.replaceRoute( FarmerLoginRoute());
+                  },
                   child: Text(
                     "Farmer",
                     style: TextStyle(

@@ -29,6 +29,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: DairyLoginPage(key: args.key)),
       );
     },
+    FarmerDashboardRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FarmerDashboardScreen(),
+      );
+    },
+    FarmerLoginRoute.name: (routeData) {
+      final args = routeData.argsAs<FarmerLoginRouteArgs>(
+          orElse: () => const FarmerLoginRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: FarmerLoginScreen(key: args.key)),
+      );
+    },
     InitialRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -84,6 +98,49 @@ class DairyLoginRouteArgs {
   @override
   String toString() {
     return 'DairyLoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [FarmerDashboardScreen]
+class FarmerDashboardRoute extends PageRouteInfo<void> {
+  const FarmerDashboardRoute({List<PageRouteInfo>? children})
+      : super(
+          FarmerDashboardRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FarmerDashboardRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FarmerLoginScreen]
+class FarmerLoginRoute extends PageRouteInfo<FarmerLoginRouteArgs> {
+  FarmerLoginRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          FarmerLoginRoute.name,
+          args: FarmerLoginRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'FarmerLoginRoute';
+
+  static const PageInfo<FarmerLoginRouteArgs> page =
+      PageInfo<FarmerLoginRouteArgs>(name);
+}
+
+class FarmerLoginRouteArgs {
+  const FarmerLoginRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'FarmerLoginRouteArgs{key: $key}';
   }
 }
 

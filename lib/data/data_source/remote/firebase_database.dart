@@ -42,4 +42,32 @@ class FirebaseDatabaseService {
       ));
     }
   }
+
+   Future<Either<AppError, void>> farmerLogin(
+      {required String id, required String password}) async {
+    final dbRef = _fbDatabase.ref('farmer');
+    try {
+      final result = await dbRef.child(id).once();
+      if (result.snapshot.exists) {
+        final data = result.snapshot.value as Map<dynamic, dynamic>;
+        final dairyPassword = data['password'] as String;
+        if (password == dairyPassword) {
+          return const Right(null);
+        } else {
+          return Left(AppError(
+              errorType: ErrorType.incorrectPassword,
+              message: "Wrond Password"));
+        }
+      } else {
+        return Left(
+            AppError(errorType: ErrorType.idNotFound, message: 'Id not found'));
+      }
+    } catch (error) {
+      // Handle any errors that occur during the process
+      return Left(AppError(
+        errorType: ErrorType.unknown,
+        message: error.toString(),
+      ));
+    }
+  }
 }
