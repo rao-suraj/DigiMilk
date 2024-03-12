@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:dhood_app/data/data_source/local/hive_service.dart';
 import 'package:dhood_app/data/utils/hive_initializer.dart';
 import 'package:dhood_app/di/get_it.dart';
+import 'package:dhood_app/domain/models/dairy_info.dart';
 import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/theme/app_theme.dart';
@@ -64,15 +65,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   // FirebaseDatabase.instance
                   //     .ref('farmer/' + 'fid001')
                   //     .set({'name': "Raj", 'password': '12221'});
-                  // getIt<IHiveService>().loginFarmer(
-                  //     farmerInfo: FarmerInfo()
-                  //       ..isLogedIn = true
-                  //       ..id = "fid001");
-                  getIt<IHiveService>().logOutFarmer();
-                  // final response = await getIt<IHiveService>().getFarmeInfo();
+                  getIt<IHiveService>().loginDairyWorker(
+                      dairyInfo: DairyInfo()
+                        ..isLogedIn = true
+                        ..id = "fid001");
+                  // getIt<IHiveService>().logOutFarmer();
+                  final response = await getIt<IHiveService>().getDairyInfo();
 
-                  // print(response?.isLogedIn);
-                  // print(response?.id);
+                  print(response?.isLogedIn);
+                  print(response?.id);
                 },
                 child: const Text("Click")),
           ],

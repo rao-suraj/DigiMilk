@@ -20,6 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         if (state is FarmerAuthenticated) {
           context.replaceRoute(const FarmerDashboardRoute());
+        } else if(state is DairyAuthenticated){
+          context.replaceRoute(const DairyDashboardRoute());
         } else if (state is Unauthenticated) {
           context.replaceRoute(const InitialRoute());
         }

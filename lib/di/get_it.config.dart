@@ -52,8 +52,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i10.RemoteDatabaseRepository(gh<_i5.FirebaseDatabaseService>()));
     gh.factory<_i11.AuthCubit>(
         () => _i11.AuthCubit(gh<_i9.ILocalRepository>()));
-    gh.factory<_i12.DairyLoginCubit>(
-        () => _i12.DairyLoginCubit(gh<_i6.IDairyWorkerRepository>()));
+    gh.factory<_i12.DairyLoginCubit>(() => _i12.DairyLoginCubit(
+          gh<_i6.IDairyWorkerRepository>(),
+          gh<_i9.ILocalRepository>(),
+        ));
     gh.factory<_i13.FarmerLoginCubit>(() => _i13.FarmerLoginCubit(
           gh<_i7.IFarmerRepository>(),
           gh<_i9.ILocalRepository>(),

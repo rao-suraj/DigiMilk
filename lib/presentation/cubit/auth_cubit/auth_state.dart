@@ -2,9 +2,11 @@ part of 'auth_cubit.dart';
 
 abstract class AuthState {
   final FarmerInfo? farmerInfo;
+  final DairyInfo? dairyInfo;
 
   const AuthState({
     this.farmerInfo,
+    this.dairyInfo,
   });
 }
 
@@ -18,7 +20,13 @@ class Unauthenticated extends AuthState {
 
 class FarmerAuthenticated extends AuthState {
   const FarmerAuthenticated({
-     super.farmerInfo,
+    super.farmerInfo,
+  });
+}
+
+class DairyAuthenticated extends AuthState {
+  const DairyAuthenticated({
+    super.dairyInfo,
   });
 }
 

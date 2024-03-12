@@ -1,6 +1,9 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
+import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/screen/widget/grid_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
@@ -24,6 +27,7 @@ class DairyDashboardState extends State<DairyDashboardScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,9 +74,10 @@ class DairyDashboardState extends State<DairyDashboardScreen> {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                         onPressed: () {
-                          // context.read<AuthCubit>().logOutFarmer();
+                          context.read<AuthCubit>().logOutDairyWorker();
+                          context.router.replaceAll([const InitialRoute()]);
                         },
-                        child:const Text("Logout")),
+                        child: const Text("Logout")),
                   )
                 ],
               ),
