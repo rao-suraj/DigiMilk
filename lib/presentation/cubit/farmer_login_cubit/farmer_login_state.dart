@@ -1,3 +1,4 @@
+import 'package:dhood_app/domain/models/farmer_info.dart';
 import 'package:equatable/equatable.dart';
 
 class FarmerLoginState extends Equatable {
@@ -16,7 +17,8 @@ class FarmerLoginInitial extends FarmerLoginState {
 }
 
 class FarmerLoginSuccrss extends FarmerLoginState {
-  const FarmerLoginSuccrss();
+  final FarmerInfo farmerInfo;
+  const FarmerLoginSuccrss({required this.farmerInfo});
 }
 
 class FarmerLoginError extends FarmerLoginState {

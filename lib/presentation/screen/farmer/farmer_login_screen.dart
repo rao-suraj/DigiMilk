@@ -94,7 +94,7 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
                                 ),
                               );
                             } else if (state is FarmerLoginSuccrss) {
-                              context.replaceRoute(const FarmerDashboardRoute());
+                              context.router.replaceAll([const FarmerDashboardRoute()]);
                             }
                           },
                           builder: (context, state) {

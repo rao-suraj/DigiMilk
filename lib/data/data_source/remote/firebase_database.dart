@@ -1,5 +1,6 @@
 import 'package:dhood_app/data/utils/app_error.dart';
 import 'package:dhood_app/data/utils/error_type.dart';
+import 'package:dhood_app/domain/models/farmer_info.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:injectable/injectable.dart';
@@ -15,7 +16,7 @@ class FirebaseDatabaseService {
     return dbRef.onValue;
   }
 
-  Future<Either<AppError, void>> dairyWorkerLogin(
+  Future<Either<AppError, Map<dynamic, dynamic>>> dairyWorkerLogin(
       {required String id, required String password}) async {
     final dbRef = _fbDatabase.ref('dairy_workers');
     try {
@@ -24,7 +25,7 @@ class FirebaseDatabaseService {
         final data = result.snapshot.value as Map<dynamic, dynamic>;
         final dairyPassword = data['password'] as String;
         if (password == dairyPassword) {
-          return const Right(null);
+          return Right(data);
         } else {
           return Left(AppError(
               errorType: ErrorType.incorrectPassword,
@@ -43,7 +44,7 @@ class FirebaseDatabaseService {
     }
   }
 
-   Future<Either<AppError, void>> farmerLogin(
+  Future<Either<AppError, FarmerInfo>> farmerLogin(
       {required String id, required String password}) async {
     final dbRef = _fbDatabase.ref('farmer');
     try {
@@ -52,7 +53,10 @@ class FirebaseDatabaseService {
         final data = result.snapshot.value as Map<dynamic, dynamic>;
         final dairyPassword = data['password'] as String;
         if (password == dairyPassword) {
-          return const Right(null);
+          return Right(FarmerInfo()
+            ..id = data['id']
+            ..isLogedIn = true
+            ..name = data['name']);
         } else {
           return Left(AppError(
               errorType: ErrorType.incorrectPassword,

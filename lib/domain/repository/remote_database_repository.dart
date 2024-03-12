@@ -16,5 +16,4 @@ class RemoteDatabaseRepository implements IRemoteDatabaseRepository {
   Stream<DatabaseEvent> getSensorDataStream() {
     return _fbDatabaseService.getSensorDataStream();
   }
-
 }
