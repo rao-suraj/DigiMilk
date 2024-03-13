@@ -43,6 +43,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: FarmerLoginScreen(key: args.key)),
       );
     },
+    GenereateBillRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const GenereateBillScreen(),
+      );
+    },
     InitialRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -148,6 +154,20 @@ class FarmerLoginRouteArgs {
   String toString() {
     return 'FarmerLoginRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [GenereateBillScreen]
+class GenereateBillRoute extends PageRouteInfo<void> {
+  const GenereateBillRoute({List<PageRouteInfo>? children})
+      : super(
+          GenereateBillRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GenereateBillRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

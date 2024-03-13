@@ -38,7 +38,7 @@ class DairyDashboardState extends State<DairyDashboardScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Johny s Family",
+                            "Dairy Dashboard",
                             style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                     color: appTheme.colorScheme.onSecondary,
@@ -49,7 +49,7 @@ class DairyDashboardState extends State<DairyDashboardScreen> {
                             height: 4,
                           ),
                           Text(
-                            "Home",
+                            context.read<AuthCubit>().state.dairyInfo!.name!,
                             style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                     color: Theme.of(context)

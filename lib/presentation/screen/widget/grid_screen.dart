@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -49,6 +51,8 @@ class GridScreen extends StatelessWidget {
                   print(data.title);
                 case "Add Farmers":
                   print(data.title);
+                case "Generate Bill":
+                  context.router.push(const GenereateBillRoute());
               }
             },
             child: Container(

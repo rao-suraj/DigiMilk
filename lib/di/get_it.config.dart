@@ -22,8 +22,10 @@ import '../presentation/cubit/auth_cubit/auth_cubit.dart' as _i11;
 import '../presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart' as _i12;
 import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
     as _i13;
+import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+    as _i14;
 import '../presentation/routes/app_route.dart' as _i3;
-import 'di_module.dart' as _i14;
+import 'di_module.dart' as _i15;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -60,8 +62,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i7.IFarmerRepository>(),
           gh<_i9.ILocalRepository>(),
         ));
+    gh.factory<_i14.GenerateBillCubit>(
+        () => _i14.GenerateBillCubit(gh<_i10.IRemoteDatabaseRepository>()));
     return this;
   }
 }
 
-class _$InjectableModule extends _i14.InjectableModule {}
+class _$InjectableModule extends _i15.InjectableModule {}
