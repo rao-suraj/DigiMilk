@@ -14,7 +14,7 @@ class DairyDashboardScreen extends StatefulWidget {
   DairyDashboardState createState() => DairyDashboardState();
 }
 
-class DairyDashboardState extends State<DairyDashboardScreen> {
+class DairyDashboardState extends State<DairyDashboardScreen>  {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);

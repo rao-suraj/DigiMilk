@@ -19,6 +19,7 @@ class DairyLoginCubit extends Cubit<DairyLoginState> {
 
     response.fold((left) => emit(DairyLoginError(left.message!)), (right) {
       _localRepository.loginDairy(dairyInfo: right);
+
       emit(const DairyLoginSuccrss());
     });
   }

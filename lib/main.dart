@@ -1,8 +1,10 @@
 import 'package:auto_route/annotations.dart';
-import 'package:dhood_app/data/data_source/local/hive_service.dart';
+import 'package:dhood_app/data/api/api_client.dart';
+import 'package:dhood_app/data/utils/api_constants.dart';
 import 'package:dhood_app/data/utils/hive_initializer.dart';
 import 'package:dhood_app/di/get_it.dart';
-import 'package:dhood_app/domain/models/dairy_info.dart';
+import 'package:dhood_app/domain/models/get_quality_params.dart';
+import 'package:dhood_app/domain/models/get_quality_response.dart';
 import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/theme/app_theme.dart';
@@ -25,8 +27,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_)=> getIt<AuthCubit>()..checkAuth())],
+      providers: [BlocProvider(create: (_) => getIt<AuthCubit>()..checkAuth())],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: _appRouter.config(),
         title: 'Flutter Demo',
         theme: AppThemes.lightheme(context),
@@ -65,15 +68,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   // FirebaseDatabase.instance
                   //     .ref('farmer/' + 'fid001')
                   //     .set({'name': "Raj", 'password': '12221'});
-                  getIt<IHiveService>().loginDairyWorker(
-                      dairyInfo: DairyInfo()
-                        ..isLogedIn = true
-                        ..id = "fid001");
-                  // getIt<IHiveService>().logOutFarmer();
-                  final response = await getIt<IHiveService>().getDairyInfo();
+                  // getIt<IHiveService>().loginDairyWorker(
+                  //     dairyInfo: DairyInfo()
+                  //       ..isLogedIn = true
+                  //       ..id = "fid001");
+                  // // getIt<IHiveService>().logOutFarmer();
+                  // final response = await getIt<IHiveService>().getDairyInfo();
 
-                  print(response?.isLogedIn);
-                  print(response?.id);
+                  // print(response?.isLogedIn);
+                  // print(response?.id);
+
+                  final response = await getIt<ApiClient>().post(
+                      path: ApiConstants.getQuality,
+                      params: GetQualityParams(
+                              ph: 7, temperature: 35, fat: 1, colors: 255)
+                          .toJson());
+
+                  final res = GetQualityResponse.fromJson(response);
+                  print(res.predicted_grade);
                 },
                 child: const Text("Click")),
           ],

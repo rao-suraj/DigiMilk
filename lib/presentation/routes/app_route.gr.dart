@@ -46,7 +46,7 @@ abstract class _$AppRouter extends RootStackRouter {
     GenereateBillRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const GenereateBillScreen(),
+        child: WrappedRoute(child: const GenereateBillScreen()),
       );
     },
     InitialRoute.name: (routeData) {
