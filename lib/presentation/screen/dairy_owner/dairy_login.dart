@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dhood_app/di/get_it.dart';
+import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart';
 import 'package:dhood_app/presentation/cubit/dairy_login_cubit/dairy_login_state.dart';
 import 'package:dhood_app/presentation/routes/app_route.dart';
@@ -84,17 +85,23 @@ class DairyLoginPage extends StatelessWidget implements AutoRouteWrapper {
                           ],
                         ),
                         BlocConsumer<DairyLoginCubit, DairyLoginState>(
-                          listener: (context, state) {
+                          listener: (context, state) async {
                             if (state is DairyLoginError) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(state.message, style:const TextStyle(color: Colors.white),),
+                                  content: Text(
+                                    state.message,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
                                   duration: const Duration(seconds: 3),
                                   backgroundColor: Colors.red,
                                 ),
                               );
                             } else if (state is DairyLoginSuccrss) {
-                              context.replaceRoute(const DairyDashboardRoute());
+                              await context
+                                  .read<AuthCubit>()
+                                  .loginDairyWorker(dairyInfo: state.dairyInfo);
+                              context.router.replaceAll([const DairyDashboardRoute()]);
                             }
                           },
                           builder: (context, state) {

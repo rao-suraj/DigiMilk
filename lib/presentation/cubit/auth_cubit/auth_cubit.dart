@@ -55,6 +55,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> loginFarmer({required FarmerInfo farmerInfo}) async {
     await _localRepository.loginFarmer(farmerInfo: farmerInfo);
+    emit(FarmerAuthenticated(farmerInfo: farmerInfo));
   }
 
   Future<void> logOutDairyWorker() async {
@@ -63,5 +64,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> loginDairyWorker({required DairyInfo dairyInfo}) async {
     await _localRepository.loginDairy(dairyInfo: dairyInfo);
+    emit(DairyAuthenticated(dairyInfo: dairyInfo));
   }
 }

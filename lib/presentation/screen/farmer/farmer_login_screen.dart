@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dhood_app/di/get_it.dart';
+import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart';
 import 'package:dhood_app/presentation/cubit/farmer_login_cubit/farmer_login_state.dart';
 import 'package:dhood_app/presentation/routes/app_route.dart';
@@ -84,18 +85,24 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
                           ],
                         ),
                         BlocConsumer<FarmerLoginCubit, FarmerLoginState>(
-                          listener: (context, state) {
+                          listener: (context, state) async {
                             if (state is FarmerLoginError) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(state.message, style:const TextStyle(color: Colors.white),),
+                                  content: Text(
+                                    state.message,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
                                   duration: const Duration(seconds: 3),
                                   backgroundColor: Colors.red,
                                 ),
                               );
                             } else if (state is FarmerLoginSuccrss) {
-                              
-                              context.router.replaceAll([const FarmerDashboardRoute()]);
+                              await context
+                                  .read<AuthCubit>()
+                                  .loginFarmer(farmerInfo: state.farmerInfo);
+                              context.router
+                                  .replaceAll([const FarmerDashboardRoute()]);
                             }
                           },
                           builder: (context, state) {
@@ -106,11 +113,9 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
                             } else {
                               return CustomButton(
                                 onTap: () {
-                                  context
-                                      .read<FarmerLoginCubit>()
-                                      .farmerlogin(
-                                          id: usernameController.text,
-                                          password: passwordController.text);
+                                  context.read<FarmerLoginCubit>().farmerlogin(
+                                      id: usernameController.text,
+                                      password: passwordController.text);
                                 },
                               );
                             }

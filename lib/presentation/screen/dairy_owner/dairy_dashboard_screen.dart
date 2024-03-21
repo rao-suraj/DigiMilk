@@ -49,7 +49,7 @@ class DairyDashboardState extends State<DairyDashboardScreen>  {
                             height: 4,
                           ),
                           Text(
-                            context.read<AuthCubit>().state.dairyInfo!.name!,
+                            context.read<AuthCubit>().state.dairyInfo!.name.toString(),
                             style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                     color: Theme.of(context)
@@ -73,7 +73,7 @@ class DairyDashboardState extends State<DairyDashboardScreen>  {
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: ()  {
                           context.read<AuthCubit>().logOutDairyWorker();
                           context.router.replaceAll([const InitialRoute()]);
                         },

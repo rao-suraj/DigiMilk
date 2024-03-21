@@ -1,3 +1,4 @@
+import 'package:dhood_app/domain/models/dairy_info.dart';
 import 'package:equatable/equatable.dart';
 
 class DairyLoginState extends Equatable {
@@ -16,7 +17,8 @@ class DairyLoginInitial extends DairyLoginState {
 }
 
 class DairyLoginSuccrss extends DairyLoginState {
-  const DairyLoginSuccrss();
+  final DairyInfo dairyInfo;
+  const DairyLoginSuccrss(this.dairyInfo);
 }
 
 class DairyLoginError extends DairyLoginState {

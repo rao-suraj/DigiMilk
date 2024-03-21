@@ -49,7 +49,7 @@ class FarmerDashboardState extends State<FarmerDashboardScreen> {
                             height: 4,
                           ),
                           Text(
-                            "Home",
+                            context.read<AuthCubit>().state.farmerInfo!.name.toString(),
                             style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                     color: Theme.of(context)
@@ -73,8 +73,9 @@ class FarmerDashboardState extends State<FarmerDashboardScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
-                        onPressed: () {
-                          context.read<AuthCubit>().logOutFarmer();
+                        onPressed: ()  {
+                           context.read<AuthCubit>().logOutFarmer();
+                          
                           context.replaceRoute(const InitialRoute());
                         },
                         child: const Text("Logout")),
