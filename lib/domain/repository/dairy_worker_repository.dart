@@ -5,7 +5,10 @@ import 'package:either_dart/either.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IDairyWorkerRepository {
-  Future<Either<AppError, DairyInfo>> dairyWorkerLogin({required String id , required String password});
+  Future<Either<AppError, DairyInfo>> dairyWorkerLogin(
+      {required String id, required String password});
+
+  Future<Either<AppError, void>> getDairyData({required String id});
 }
 
 @LazySingleton(as: IDairyWorkerRepository)
@@ -18,5 +21,10 @@ class DairyWorkerRepository implements IDairyWorkerRepository {
   Future<Either<AppError, DairyInfo>> dairyWorkerLogin(
       {required String id, required String password}) async {
     return await _databaseService.dairyWorkerLogin(id: id, password: password);
+  }
+  
+  @override
+  Future<Either<AppError, void>> getDairyData({required String id}) async {
+    return await _databaseService.getDairyData(id: id);
   }
 }

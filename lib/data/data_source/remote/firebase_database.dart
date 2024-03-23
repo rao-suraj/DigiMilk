@@ -2,7 +2,7 @@ import 'package:dhood_app/data/utils/app_error.dart';
 import 'package:dhood_app/data/utils/error_type.dart';
 import 'package:dhood_app/domain/models/dairy_info.dart';
 import 'package:dhood_app/domain/models/farmer_info.dart';
-import 'package:dhood_app/domain/models/upload_milk_quality_params.dart';
+import 'package:dhood_app/domain/models/milk_info.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:injectable/injectable.dart';
@@ -82,7 +82,7 @@ class FirebaseDatabaseService {
   }
 
   Future<Either<AppError, void>> updateMildQuality(
-      {required UploadMilkQualityParams params}) async {
+      {required MilkInfo params}) async {
     final dbFarmerRef = _fbDatabase.ref('farmer');
     final dbDairyRef = _fbDatabase.ref('dairy_workers');
     try {
@@ -90,12 +90,12 @@ class FirebaseDatabaseService {
           .child(params.farmerId)
           .child('farmer_log')
           .child(DateFormat('yyyy-MM-dd').format(DateTime.now()))
-          .set(params.toJson());
+          .update(params.toJson());
       await dbDairyRef
           .child(params.dairyId)
           .child('dairy_log')
           .child(DateFormat('yyyy-MM-dd').format(DateTime.now()))
-          .set(params.toJson());
+          .update(params.toJson());
       return const Right(null);
     } catch (error) {
       print(error);
@@ -108,14 +108,104 @@ class FirebaseDatabaseService {
   }
 
   Future<Either<AppError, void>> addFarmer(
-      {required String name, required String id, required String password}) async {
+      {required String name,
+      required String id,
+      required String password}) async {
     final dbFarmerRef = _fbDatabase.ref('farmer');
     try {
-      dbFarmerRef.child(id).set({name: name, password: password});
+      dbFarmerRef.child(id).set({'id': id, 'name': name, 'password': password});
       return const Right(null);
     } catch (e) {
-      return Left(AppError(errorType: ErrorType.unknown, message: "error while adding data"));
+      return Left(AppError(
+          errorType: ErrorType.unknown, message: "error while adding data"));
     }
   }
 
+  // no other method comming into mind right now
+  Future<Either<AppError, List<FarmerInfo>>> getFarmerList() async {
+    final dbFarmerRef = _fbDatabase.ref('farmer');
+    final res = await dbFarmerRef.get();
+    List<FarmerInfo> list = [];
+    try {
+      // iterate through all the farmers
+      for (var child in res.children) {
+        await dbFarmerRef.child(child.key.toString()).once().then((value) {
+          // store the farmer info into object and addd it to list
+          final info = value.snapshot.value as Map<dynamic, dynamic>;
+          final farmerInfo = FarmerInfo()
+            ..id = info['id']
+            ..name = info['name'];
+          list.add(farmerInfo);
+        });
+      }
+
+      return Right(list);
+    } catch (e) {
+      return Left(
+          AppError(errorType: ErrorType.unknown, message: e.toString()));
+    }
+  }
+
+  Future<Either<AppError, void>> getMilkData({required String id}) async {
+    final ref = _fbDatabase.ref('farmer').child(id).child('farmer_log');
+
+    try {
+      List<MilkInfo> list = [];
+      await ref.get().then((value) {
+        for (var item in value.children) {
+          // print(item.value);
+          final res = item.value as Map<dynamic, dynamic>;
+          final fff = MilkInfo(
+              dairyId: res['dairyId'],
+              farmerId: res['farmerId'],
+              ph: res['ph'],
+              temperature: res['temperature'],
+              fat: res['fat'],
+              colors: res['colors'],
+              quality: res['quality'],
+              time: Time.fromString(res['time']),
+              date: res['date'],
+              totAmount: res['totAmount'],
+              quantity: res['quantity']);
+          list.add(fff);
+        }
+      });
+      print(list[0].farmerId);
+      return const Right(null);
+    } catch (e) {
+      print('Error $e');
+      return const Right(null);
+    }
+  }
+
+  Future<Either<AppError, void>> getDairyData({required String id}) async {
+    final ref = _fbDatabase.ref('dairy_workers').child(id).child('dairy_log');
+
+    try {
+      List<MilkInfo> list = [];
+      await ref.get().then((value) {
+        for (var item in value.children) {
+          final res = item.value as Map<dynamic, dynamic>;
+          list.add(MilkInfo(
+            dairyId: res['dairyId'],
+            farmerId: res['farmerId'],
+            ph: res['ph'],
+            temperature: res['temperature'],
+            fat: res['fat'],
+            colors: res['colors'],
+            quality: res['quality'],
+            time: Time.fromString(res['time']),
+            date: res['date'],
+            totAmount: res['totAmount'],
+            quantity: res['quantity'],
+          ));
+        }
+      });
+      print(list[0].dairyId);
+      return const Right(null);
+    } catch (e) {
+      print(e.toString());
+      return const Right(null);
+    }
+  }
 }

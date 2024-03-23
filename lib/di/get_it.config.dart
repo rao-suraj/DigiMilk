@@ -22,12 +22,14 @@ import '../domain/repository/local_repository.dart' as _i10;
 import '../domain/repository/remote_database_repository.dart' as _i11;
 import '../presentation/cubit/auth_cubit/auth_cubit.dart' as _i13;
 import '../presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart' as _i14;
-import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
+import '../presentation/cubit/farmer_details_cubit/farmer_details_cubit.dart'
     as _i15;
-import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
     as _i16;
+import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+    as _i17;
 import '../presentation/routes/app_route.dart' as _i3;
-import 'di_module.dart' as _i17;
+import 'di_module.dart' as _i18;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -62,14 +64,16 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i7.IDairyWorkerRepository>(),
           gh<_i10.ILocalRepository>(),
         ));
-    gh.factory<_i15.FarmerLoginCubit>(() => _i15.FarmerLoginCubit(
+    gh.factory<_i15.FarmerDetailsCubit>(
+        () => _i15.FarmerDetailsCubit(gh<_i8.IFarmerRepository>()));
+    gh.factory<_i16.FarmerLoginCubit>(() => _i16.FarmerLoginCubit(
           gh<_i8.IFarmerRepository>(),
           gh<_i10.ILocalRepository>(),
         ));
-    gh.factory<_i16.GenerateBillCubit>(
-        () => _i16.GenerateBillCubit(gh<_i11.IRemoteDatabaseRepository>()));
+    gh.factory<_i17.GenerateBillCubit>(
+        () => _i17.GenerateBillCubit(gh<_i11.IRemoteDatabaseRepository>()));
     return this;
   }
 }
 
-class _$InjectableModule extends _i17.InjectableModule {}
+class _$InjectableModule extends _i18.InjectableModule {}

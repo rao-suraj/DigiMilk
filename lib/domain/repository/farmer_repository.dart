@@ -7,6 +7,13 @@ import 'package:injectable/injectable.dart';
 abstract class IFarmerRepository {
   Future<Either<AppError, FarmerInfo>> farmerLogin(
       {required String id, required String password});
+
+  Future<Either<AppError, void>> getMilkData({required String id});
+
+  Future<Either<AppError, List<FarmerInfo>>> getFarmerList();
+
+  Future<Either<AppError, void>> addFarmer(
+      {required String name, required String id, required String password});
 }
 
 @LazySingleton(as: IFarmerRepository)
@@ -18,7 +25,21 @@ class DairyWorkerRepository implements IFarmerRepository {
   @override
   Future<Either<AppError, FarmerInfo>> farmerLogin(
       {required String id, required String password}) async {
-    return 
-        await _databaseService.farmerLogin(id: id, password: password);
+    return await _databaseService.farmerLogin(id: id, password: password);
+  }
+  
+  @override
+  Future<Either<AppError, void>> addFarmer({required String name, required String id, required String password}) async {
+    return await _databaseService.addFarmer(name: name, id: id, password: password);
+  }
+  
+  @override
+  Future<Either<AppError, List<FarmerInfo>>> getFarmerList() async {
+    return await _databaseService.getFarmerList();
+  }
+  
+  @override
+  Future<Either<AppError, void>> getMilkData({required String id}) async {
+    return await _databaseService.getMilkData(id: id);
   }
 }

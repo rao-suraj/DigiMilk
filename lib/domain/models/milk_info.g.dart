@@ -1,14 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'upload_milk_quality_params.dart';
+part of 'milk_info.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UploadMilkQualityParams _$UploadMilkQualityParamsFromJson(
-        Map<String, dynamic> json) =>
-    UploadMilkQualityParams(
+MilkInfo _$MilkInfoFromJson(Map<String, dynamic> json) => MilkInfo(
       dairyId: json['dairyId'] as String,
       farmerId: json['farmerId'] as String,
       ph: json['ph'] as int,
@@ -17,11 +15,12 @@ UploadMilkQualityParams _$UploadMilkQualityParamsFromJson(
       colors: json['colors'] as int,
       quality: json['quality'] as int,
       time: $enumDecode(_$TimeEnumMap, json['time']),
+      date: json['date'] as String,
+      quantity: json['quantity'] as int,
+      totAmount: json['totAmount'] as int,
     );
 
-Map<String, dynamic> _$UploadMilkQualityParamsToJson(
-        UploadMilkQualityParams instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MilkInfoToJson(MilkInfo instance) => <String, dynamic>{
       'dairyId': instance.dairyId,
       'farmerId': instance.farmerId,
       'ph': instance.ph,
@@ -30,9 +29,12 @@ Map<String, dynamic> _$UploadMilkQualityParamsToJson(
       'colors': instance.colors,
       'quality': instance.quality,
       'time': _$TimeEnumMap[instance.time]!,
+      'date': instance.date,
+      'totAmount': instance.totAmount,
+      'quantity': instance.quantity,
     };
 
 const _$TimeEnumMap = {
-  Time.morining: 'morining',
-  Time.eveling: 'eveling',
+  Time.morning: 'morning',
+  Time.evening: 'evening',
 };

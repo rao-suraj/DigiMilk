@@ -35,6 +35,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const FarmerDashboardScreen(),
       );
     },
+    FarmerDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const FarmerDetailsScreen()),
+      );
+    },
     FarmerLoginRoute.name: (routeData) {
       final args = routeData.argsAs<FarmerLoginRouteArgs>(
           orElse: () => const FarmerLoginRouteArgs());
@@ -123,6 +129,20 @@ class FarmerDashboardRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FarmerDashboardRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FarmerDetailsScreen]
+class FarmerDetailsRoute extends PageRouteInfo<void> {
+  const FarmerDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          FarmerDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FarmerDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

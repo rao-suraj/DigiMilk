@@ -77,7 +77,10 @@ class DairyDashboardState extends State<DairyDashboardScreen>  {
                           context.read<AuthCubit>().logOutDairyWorker();
                           context.router.replaceAll([const InitialRoute()]);
                         },
-                        child: const Text("Logout")),
+                        child: Text("Logout", style: TextStyle(
+                                    color: appTheme.colorScheme.onPrimary,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold)  ,)),
                   )
                 ],
               ),

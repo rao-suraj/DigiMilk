@@ -53,6 +53,9 @@ class GridScreen extends StatelessWidget {
                   print(data.title);
                 case "Generate Bill":
                   context.router.push(const GenereateBillRoute());
+                case "Farmers Details":
+                  print("Ell");
+                  context.router.push(const FarmerDetailsRoute());
               }
             },
             child: Container(
