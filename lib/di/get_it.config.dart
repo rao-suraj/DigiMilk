@@ -21,15 +21,17 @@ import '../domain/repository/farmer_repository.dart' as _i8;
 import '../domain/repository/local_repository.dart' as _i10;
 import '../domain/repository/remote_database_repository.dart' as _i11;
 import '../presentation/cubit/auth_cubit/auth_cubit.dart' as _i13;
-import '../presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart' as _i14;
+import '../presentation/cubit/dairy_details_cubit/dairy_details_cubit.dart'
+    as _i14;
+import '../presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart' as _i15;
 import '../presentation/cubit/farmer_details_cubit/farmer_details_cubit.dart'
-    as _i15;
-import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
     as _i16;
-import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
     as _i17;
+import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+    as _i18;
 import '../presentation/routes/app_route.dart' as _i3;
-import 'di_module.dart' as _i18;
+import 'di_module.dart' as _i19;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -60,20 +62,22 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i12.ApiClient>(() => _i12.ApiClient(gh<_i4.Dio>()));
     gh.factory<_i13.AuthCubit>(
         () => _i13.AuthCubit(gh<_i10.ILocalRepository>()));
-    gh.factory<_i14.DairyLoginCubit>(() => _i14.DairyLoginCubit(
+    gh.factory<_i14.DairyDetailsCubit>(
+        () => _i14.DairyDetailsCubit(gh<_i7.IDairyWorkerRepository>()));
+    gh.factory<_i15.DairyLoginCubit>(() => _i15.DairyLoginCubit(
           gh<_i7.IDairyWorkerRepository>(),
           gh<_i10.ILocalRepository>(),
         ));
-    gh.factory<_i15.FarmerDetailsCubit>(
-        () => _i15.FarmerDetailsCubit(gh<_i8.IFarmerRepository>()));
-    gh.factory<_i16.FarmerLoginCubit>(() => _i16.FarmerLoginCubit(
+    gh.factory<_i16.FarmerDetailsCubit>(
+        () => _i16.FarmerDetailsCubit(gh<_i8.IFarmerRepository>()));
+    gh.factory<_i17.FarmerLoginCubit>(() => _i17.FarmerLoginCubit(
           gh<_i8.IFarmerRepository>(),
           gh<_i10.ILocalRepository>(),
         ));
-    gh.factory<_i17.GenerateBillCubit>(
-        () => _i17.GenerateBillCubit(gh<_i11.IRemoteDatabaseRepository>()));
+    gh.factory<_i18.GenerateBillCubit>(
+        () => _i18.GenerateBillCubit(gh<_i11.IRemoteDatabaseRepository>()));
     return this;
   }
 }
 
-class _$InjectableModule extends _i18.InjectableModule {}
+class _$InjectableModule extends _i19.InjectableModule {}

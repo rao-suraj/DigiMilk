@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const DairyDashboardScreen(),
       );
     },
+    DairyDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const DairyDetailsScreen()),
+      );
+    },
     DairyLoginRoute.name: (routeData) {
       final args = routeData.argsAs<DairyLoginRouteArgs>(
           orElse: () => const DairyLoginRouteArgs());
@@ -86,6 +92,20 @@ class DairyDashboardRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'DairyDashboardRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DairyDetailsScreen]
+class DairyDetailsRoute extends PageRouteInfo<void> {
+  const DairyDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          DairyDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DairyDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

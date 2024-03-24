@@ -24,11 +24,13 @@ class FarmerDetailsScreen extends StatefulWidget implements AutoRouteWrapper {
 class _FarmerDetailsState extends State<FarmerDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text("Farmer List"),
       ),
+      backgroundColor: colorScheme.background,
       body: Center(
         child: BlocBuilder<FarmerDetailsCubit, FarmerDetailsState>(
           builder: (context, state) {
@@ -37,9 +39,15 @@ class _FarmerDetailsState extends State<FarmerDetailsScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is FarmerDetailsSuccrss) {
-              return Center(
-                child: Text(state.farmerInfo.toString()),
-              );
+              return ListView.builder(
+                  itemCount: state.farmerInfo.length,
+                  itemBuilder: (context, index) {
+                    final data = state.farmerInfo;
+                    return ListTile(
+                      title: Text("${data[index].name}",style: TextStyle(color: colorScheme.onSecondary,fontSize: 20),),
+                      subtitle: Text("${data[index].id}",style: TextStyle(color: colorScheme.onSecondary,fontSize: 14)),
+                    );
+                  });
             } else {
               return const Text("Error");
             }

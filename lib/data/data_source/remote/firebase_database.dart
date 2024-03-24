@@ -146,7 +146,7 @@ class FirebaseDatabaseService {
     }
   }
 
-  Future<Either<AppError, void>> getMilkData({required String id}) async {
+  Future<Either<AppError, List<MilkInfo>>> getMilkData({required String id}) async {
     final ref = _fbDatabase.ref('farmer').child(id).child('farmer_log');
 
     try {
@@ -170,15 +170,14 @@ class FirebaseDatabaseService {
           list.add(fff);
         }
       });
-      print(list[0].farmerId);
-      return const Right(null);
+       return Right(list);
     } catch (e) {
-      print('Error $e');
-      return const Right(null);
+      return Left(AppError(errorType: ErrorType.unknown, message: e.toString()));
     }
   }
 
-  Future<Either<AppError, void>> getDairyData({required String id}) async {
+  Future<Either<AppError, List<MilkInfo>>> getDairyData(
+      {required String id}) async {
     final ref = _fbDatabase.ref('dairy_workers').child(id).child('dairy_log');
 
     try {
@@ -201,11 +200,9 @@ class FirebaseDatabaseService {
           ));
         }
       });
-      print(list[0].dairyId);
-      return const Right(null);
+      return Right(list);
     } catch (e) {
-      print(e.toString());
-      return const Right(null);
+      return Left(AppError(errorType: ErrorType.unknown, message: e.toString()));
     }
   }
 }

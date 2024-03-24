@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dhood_app/main.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/dairy_dashboard_screen.dart';
+import 'package:dhood_app/presentation/screen/dairy_owner/dairy_details_screen.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/dairy_login.dart';
-import 'package:dhood_app/presentation/screen/dairy_owner/farmer_list_screen.dart';
+import 'package:dhood_app/presentation/screen/dairy_owner/farmer_detail_screen.dart';
 import 'package:dhood_app/presentation/screen/farmer/farmer_dashboard_screen.dart';
 import 'package:dhood_app/presentation/screen/farmer/farmer_login_screen.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/generate_bill_screen.dart';
@@ -27,5 +28,6 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: SplashRoute.page,initial: true),
     AutoRoute(page: GenereateBillRoute.page),
     AutoRoute(page: FarmerDetailsRoute.page),
+    AutoRoute(page: DairyDetailsRoute.page),
   ];
 }
