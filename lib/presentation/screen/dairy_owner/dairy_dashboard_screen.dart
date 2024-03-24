@@ -80,7 +80,7 @@ class DairyDashboardState extends State<DairyDashboardScreen>  {
                         child: Text("Logout", style: TextStyle(
                                     color: appTheme.colorScheme.onPrimary,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.bold)  ,)),
+                                    fontWeight: FontWeight.bold))),
                   )
                 ],
               ),

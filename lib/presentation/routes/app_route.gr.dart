@@ -67,6 +67,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const InitialScreen(),
       );
     },
+    MilkLogRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const MilkLogScreen()),
+      );
+    },
     MyHomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -220,6 +226,20 @@ class InitialRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'InitialRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MilkLogScreen]
+class MilkLogRoute extends PageRouteInfo<void> {
+  const MilkLogRoute({List<PageRouteInfo>? children})
+      : super(
+          MilkLogRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MilkLogRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -7,6 +7,7 @@ import 'package:dhood_app/presentation/screen/dairy_owner/farmer_detail_screen.d
 import 'package:dhood_app/presentation/screen/farmer/farmer_dashboard_screen.dart';
 import 'package:dhood_app/presentation/screen/farmer/farmer_login_screen.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/generate_bill_screen.dart';
+import 'package:dhood_app/presentation/screen/farmer/milk_log_screen.dart';
 import 'package:dhood_app/presentation/screen/initial_screen.dart';
 import 'package:dhood_app/presentation/screen/splash_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -29,5 +30,6 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: GenereateBillRoute.page),
     AutoRoute(page: FarmerDetailsRoute.page),
     AutoRoute(page: DairyDetailsRoute.page),
+    AutoRoute(page: MilkLogRoute.page),
   ];
 }

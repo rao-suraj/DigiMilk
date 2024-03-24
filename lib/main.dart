@@ -86,17 +86,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   // final res = GetQualityResponse.fromJson(response);
                   // print(res.predicted_grade);
                   // print('Hell');
-                  // getIt<FirebaseDatabaseService>().updateMildQuality(
-                  //     params: MilkInfo(
-                  //         dairyId: 'id001',
-                  //         farmerId: 'fid002',
-                  //         ph: 7,
-                  //         temperature: 32,
-                  //         fat: 1,
-                  //         colors: 255,
-                  //         quality: 1,
-                  //         time: Time.getTime(),
-                  //         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),totAmount: 1001,quantity: 2));
+                  getIt<FirebaseDatabaseService>().updateMildQuality(
+                      params: MilkInfo(
+                          dairyId: 'id001',
+                          farmerId: 'fid001',
+                          ph: 7,
+                          temperature: 32,
+                          fat: 1,
+                          colors: 255,
+                          quality: 1,
+                          time: Time.getTime(),
+                          date: DateFormat('yyyy-MM-dd').format(DateTime.now()),totAmount: 1001,quantity: 2));
                   // getIt<FirebaseDatabaseService>().addFarmer(
                   //     name: 'Shivraj', id: 'fid003', password: '54321');
                   // getIt<FirebaseDatabaseService>().getMilkData(id: 'fid002');

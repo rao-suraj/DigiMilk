@@ -78,7 +78,10 @@ class FarmerDashboardState extends State<FarmerDashboardScreen> {
                           
                           context.replaceRoute(const InitialRoute());
                         },
-                        child: const Text("Logout")),
+                        child: Text("Logout", style: TextStyle(
+                                    color: appTheme.colorScheme.onPrimary,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold))),
                   )
                 ],
               ),
