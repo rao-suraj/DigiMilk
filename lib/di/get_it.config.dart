@@ -13,26 +13,27 @@ import 'package:firebase_database/firebase_database.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../data/api/api_client.dart' as _i13;
+import '../data/api/api_client.dart' as _i14;
 import '../data/data_source/local/hive_service.dart' as _i9;
 import '../data/data_source/remote/firebase_database.dart' as _i6;
 import '../domain/repository/dairy_worker_repository.dart' as _i7;
 import '../domain/repository/farmer_repository.dart' as _i8;
 import '../domain/repository/local_repository.dart' as _i10;
 import '../domain/repository/remote_database_repository.dart' as _i11;
-import '../presentation/cubit/auth_cubit/auth_cubit.dart' as _i14;
+import '../presentation/cubit/add_farmer_cubit/add_farmer_cubit.dart' as _i13;
+import '../presentation/cubit/auth_cubit/auth_cubit.dart' as _i15;
 import '../presentation/cubit/dairy_details_cubit/dairy_details_cubit.dart'
-    as _i15;
-import '../presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart' as _i16;
+    as _i16;
+import '../presentation/cubit/dairy_login_cubit/dairy_login_cubit.dart' as _i17;
 import '../presentation/cubit/farmer_details_cubit/farmer_details_cubit.dart'
-    as _i17;
-import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
     as _i18;
-import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+import '../presentation/cubit/farmer_login_cubit/farmer_login_cubit.dart'
     as _i19;
+import '../presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart'
+    as _i20;
 import '../presentation/cubit/milk_log_cubit/milk_log_cubit.dart' as _i12;
 import '../presentation/routes/app_route.dart' as _i3;
-import 'di_module.dart' as _i20;
+import 'di_module.dart' as _i21;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -62,25 +63,27 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i11.RemoteDatabaseRepository(gh<_i6.FirebaseDatabaseService>()));
     gh.factory<_i12.MilkLogCubit>(
         () => _i12.MilkLogCubit(gh<_i8.IFarmerRepository>()));
-    gh.lazySingleton<_i13.ApiClient>(() => _i13.ApiClient(gh<_i4.Dio>()));
-    gh.factory<_i14.AuthCubit>(
-        () => _i14.AuthCubit(gh<_i10.ILocalRepository>()));
-    gh.factory<_i15.DairyDetailsCubit>(
-        () => _i15.DairyDetailsCubit(gh<_i7.IDairyWorkerRepository>()));
-    gh.factory<_i16.DairyLoginCubit>(() => _i16.DairyLoginCubit(
+    gh.factory<_i13.AddFarmerCubit>(
+        () => _i13.AddFarmerCubit(gh<_i8.IFarmerRepository>()));
+    gh.lazySingleton<_i14.ApiClient>(() => _i14.ApiClient(gh<_i4.Dio>()));
+    gh.factory<_i15.AuthCubit>(
+        () => _i15.AuthCubit(gh<_i10.ILocalRepository>()));
+    gh.factory<_i16.DairyDetailsCubit>(
+        () => _i16.DairyDetailsCubit(gh<_i7.IDairyWorkerRepository>()));
+    gh.factory<_i17.DairyLoginCubit>(() => _i17.DairyLoginCubit(
           gh<_i7.IDairyWorkerRepository>(),
           gh<_i10.ILocalRepository>(),
         ));
-    gh.factory<_i17.FarmerDetailsCubit>(
-        () => _i17.FarmerDetailsCubit(gh<_i8.IFarmerRepository>()));
-    gh.factory<_i18.FarmerLoginCubit>(() => _i18.FarmerLoginCubit(
+    gh.factory<_i18.FarmerDetailsCubit>(
+        () => _i18.FarmerDetailsCubit(gh<_i8.IFarmerRepository>()));
+    gh.factory<_i19.FarmerLoginCubit>(() => _i19.FarmerLoginCubit(
           gh<_i8.IFarmerRepository>(),
           gh<_i10.ILocalRepository>(),
         ));
-    gh.factory<_i19.GenerateBillCubit>(
-        () => _i19.GenerateBillCubit(gh<_i11.IRemoteDatabaseRepository>()));
+    gh.factory<_i20.GenerateBillCubit>(
+        () => _i20.GenerateBillCubit(gh<_i11.IRemoteDatabaseRepository>()));
     return this;
   }
 }
 
-class _$InjectableModule extends _i20.InjectableModule {}
+class _$InjectableModule extends _i21.InjectableModule {}

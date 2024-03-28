@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dhood_app/main.dart';
+import 'package:dhood_app/presentation/screen/dairy_owner/add_farmer_screen.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/dairy_dashboard_screen.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/dairy_details_screen.dart';
 import 'package:dhood_app/presentation/screen/dairy_owner/dairy_login.dart';
@@ -31,5 +32,6 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: FarmerDetailsRoute.page),
     AutoRoute(page: DairyDetailsRoute.page),
     AutoRoute(page: MilkLogRoute.page),
+    AutoRoute(page: AddFarmerRoute.page),
   ];
 }
