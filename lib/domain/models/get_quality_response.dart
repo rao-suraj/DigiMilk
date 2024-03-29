@@ -4,8 +4,8 @@ part 'get_quality_response.g.dart';
 
 @JsonSerializable()
 class GetQualityResponse {
-  final int predicted_grade;
-  GetQualityResponse({required this.predicted_grade});
+  final int grade;
+  GetQualityResponse({required this.grade});
 
   factory GetQualityResponse.fromJson(Map<String, dynamic> json) =>
       _$GetQualityResponseFromJson(json);

@@ -1,15 +1,14 @@
 import 'package:auto_route/annotations.dart';
-import 'package:dhood_app/data/data_source/remote/firebase_database.dart';
 import 'package:dhood_app/data/utils/hive_initializer.dart';
 import 'package:dhood_app/di/get_it.dart';
-import 'package:dhood_app/domain/models/milk_info.dart';
+import 'package:dhood_app/domain/models/get_quality_params.dart';
+import 'package:dhood_app/domain/repository/remote_database_repository.dart';
 import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,26 +76,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   // print(response?.isLogedIn);
                   // print(response?.id);
 
-                  // final response = await getIt<ApiClient>().post(
-                  //     path: ApiConstants.getQuality,
-                  //     params: GetQualityParams(
-                  //             ph: 7, temperature: 35, fat: 1, colors: 255)
-                  //         .toJson());
+                  final response = await getIt<IRemoteDatabaseRepository>()
+                      .getQuality(
+                          params: GetQualityParams(
+                              ph: 7, temperature: 35, fat: 1, colors: 255));
+
+                  response.fold((left) => print(left), (right) => print(right.grade));
 
                   // final res = GetQualityResponse.fromJson(response);
                   // print(res.predicted_grade);
                   // print('Hell');
-                  getIt<FirebaseDatabaseService>().updateMildQuality(
-                      params: MilkInfo(
-                          dairyId: 'id001',
-                          farmerId: 'fid001',
-                          ph: 7,
-                          temperature: 32,
-                          fat: 1,
-                          colors: 255,
-                          quality: 1,
-                          time: Time.getTime(),
-                          date: DateFormat('yyyy-MM-dd').format(DateTime.now()),totAmount: 1001,quantity: 2));
+                  // getIt<FirebaseDatabaseService>().updateMildQuality(
+                  //     params: MilkInfo(
+                  //         dairyId: 'id001',
+                  //         farmerId: 'fid001',
+                  //         ph: 7,
+                  //         temperature: 32,
+                  //         fat: 1,
+                  //         colors: 255,
+                  //         quality: 1,
+                  //         time: Time.getTime(),
+                  //         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                  //         totAmount: 1001,
+                  //         quantity: 2));
                   // getIt<FirebaseDatabaseService>().addFarmer(
                   //     name: 'Shivraj', id: 'fid003', password: '54321');
                   // getIt<FirebaseDatabaseService>().getMilkData(id: 'fid002');

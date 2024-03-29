@@ -74,63 +74,70 @@ class _DairyDetailsState extends State<DairyDetailsScreen> {
                             ),
                           ],
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Farmer id: ${data[index].farmerId}",
-                              style: GoogleFonts.openSans(
-                                  textStyle: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600)),
-                            ),const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "Date: ${data[index].date}",
-                              style: GoogleFonts.openSans(
-                                  textStyle: TextStyle(
-                                      color: appTheme.colorScheme.onSecondary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600)),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "Quality: ${data[index].quality}",
-                              style: GoogleFonts.openSans(
-                                  textStyle: TextStyle(
-                                      color: appTheme.colorScheme.onSecondary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600)),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              "Quantity: ${data[index].quantity} L",
-                              style: GoogleFonts.openSans(
-                                  textStyle: TextStyle(
-                                      color: appTheme.colorScheme.onSecondary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600)),
-                            ),
-                            const SizedBox(
-                              height: 14,
-                            ),
-                            Text(
-                              "Amount: ${data[index].totAmount} Rs",
-                              style: GoogleFonts.openSans(
-                                  textStyle: TextStyle(
-                                      color: appTheme.colorScheme.onSecondary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600)),
-                            ),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "Farmer id: ${data[index].farmerId}",
+                                  style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ),
+                              FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "Date: ${data[index].date}",
+                                  style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                          color: appTheme.colorScheme.onSecondary,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ),
+                              FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "Quality: ${data[index].quality}",
+                                  style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                          color: appTheme.colorScheme.onSecondary,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                "Quantity: ${data[index].quantity} L",
+                                style: GoogleFonts.openSans(
+                                    textStyle: TextStyle(
+                                        color: appTheme.colorScheme.onSecondary,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                              const SizedBox(
+                                height: 14,
+                              ),
+                              Text(
+                                "Amount: ${data[index].totAmount} Rs",
+                                style: GoogleFonts.openSans(
+                                    textStyle: TextStyle(
+                                        color: appTheme.colorScheme.onSecondary,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }),

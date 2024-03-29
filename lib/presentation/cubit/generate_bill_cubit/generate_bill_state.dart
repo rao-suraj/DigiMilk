@@ -30,9 +30,18 @@ class GenerateBillLoaded extends GenerateBillState {
   List<Object?> get props => [databaseEvent];
 }
 
-class GenerateBillError extends GenerateBillState {
-  const GenerateBillError();
+class GenerateBillSuccess extends GenerateBillState {
+  final String quality;
+  final int tAmount;
+  const GenerateBillSuccess(this.quality, this.tAmount);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [quality, tAmount];
+}
+
+class GenerateBillError extends GenerateBillState {
+  final String message;
+  const GenerateBillError(this.message);
+  @override
+  List<Object?> get props => [message];
 }

@@ -8,10 +8,10 @@ part of 'get_quality_response.dart';
 
 GetQualityResponse _$GetQualityResponseFromJson(Map<String, dynamic> json) =>
     GetQualityResponse(
-      predicted_grade: json['predicted_grade'] as int,
+      grade: json['grade'] as int,
     );
 
 Map<String, dynamic> _$GetQualityResponseToJson(GetQualityResponse instance) =>
     <String, dynamic>{
-      'predicted_grade': instance.predicted_grade,
+      'grade': instance.grade,
     };

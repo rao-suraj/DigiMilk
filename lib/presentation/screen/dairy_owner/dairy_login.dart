@@ -24,6 +24,7 @@ class DairyLoginPage extends StatelessWidget implements AutoRouteWrapper {
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Expanded(
