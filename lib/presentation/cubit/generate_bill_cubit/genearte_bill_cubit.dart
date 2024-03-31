@@ -41,12 +41,15 @@ class GenerateBillCubit extends Cubit<GenerateBillState> {
       switch (right.grade) {
         case 0:
           quality = "Bad";
-          totAmount = 33 * quantity;
+          totAmount = 32 * quantity;
           break;
         case 1:
           quality = "Good";
-          totAmount = 40 * quantity;
+          totAmount = 34 * quantity;
           break;
+        case 2:
+          quality = "Great";
+          totAmount = 36 * quantity;
         default:
           return const GenerateBillError("Invalid grade");
       }

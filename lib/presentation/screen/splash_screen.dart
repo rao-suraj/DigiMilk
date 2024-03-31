@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       },
       builder: (context, state) {
         if (state is AuthLoading) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         } else {
           return Center(
             child: Container(),

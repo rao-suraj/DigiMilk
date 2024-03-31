@@ -26,6 +26,7 @@ class DairyDetailsScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _DairyDetailsState extends State<DairyDetailsScreen> {
+  List<String> quality = ["Bad","Good","Great"];
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -55,88 +56,89 @@ class _DairyDetailsState extends State<DairyDetailsScreen> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
                     itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .background
-                              .withOpacity(0.97),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: appBrightmess == Brightness.dark
-                                  ? Colors.black.withOpacity(0.2)
-                                  : Colors.grey.shade300, // shadow color
-                              spreadRadius: 2, // spread radius
-                              blurRadius: 10, // blur radius
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  "Farmer id: ${data[index].farmerId}",
-                                  style: GoogleFonts.openSans(
-                                      textStyle: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondary,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600)),
-                                ),
-                              ),
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  "Date: ${data[index].date}",
-                                  style: GoogleFonts.openSans(
-                                      textStyle: TextStyle(
-                                          color: appTheme.colorScheme.onSecondary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600)),
-                                ),
-                              ),
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  "Quality: ${data[index].quality}",
-                                  style: GoogleFonts.openSans(
-                                      textStyle: TextStyle(
-                                          color: appTheme.colorScheme.onSecondary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600)),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Text(
-                                "Quantity: ${data[index].quantity} L",
-                                style: GoogleFonts.openSans(
-                                    textStyle: TextStyle(
-                                        color: appTheme.colorScheme.onSecondary,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600)),
-                              ),
-                              const SizedBox(
-                                height: 14,
-                              ),
-                              Text(
-                                "Amount: ${data[index].totAmount} Rs",
-                                style: GoogleFonts.openSans(
-                                    textStyle: TextStyle(
-                                        color: appTheme.colorScheme.onSecondary,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600)),
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .background
+                                .withOpacity(0.97),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: appBrightmess == Brightness.dark
+                                    ? Colors.black.withOpacity(0.2)
+                                    : Colors.grey.shade300, // shadow color
+                                spreadRadius: 2, // spread radius
+                                blurRadius: 10, // blur radius
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Text(
+                                    "Farmer id: ${data[index].farmerId}",
+                                    style: GoogleFonts.openSans(
+                                        textStyle: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600)),
+                                  ),
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Text(
+                                    "Date: ${data[index].date}",
+                                    style: GoogleFonts.openSans(
+                                        textStyle: TextStyle(
+                                            color: appTheme
+                                                .colorScheme.onSecondary,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600)),
+                                  ),
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Text(
+                                    "Quality: ${quality[data[index].quality]}",
+                                    style: GoogleFonts.openSans(
+                                        textStyle: TextStyle(
+                                            color: appTheme
+                                                .colorScheme.onSecondary,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600)),
+                                  ),
+                                ),
+                                Text(
+                                  "Quantity: ${data[index].quantity} L",
+                                  style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                          color:
+                                              appTheme.colorScheme.onSecondary,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                                Text(
+                                  "Amount: ${data[index].totAmount} Rs",
+                                  style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                          color:
+                                              appTheme.colorScheme.onSecondary,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

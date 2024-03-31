@@ -110,7 +110,7 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Assets.images.generateBill.svg(width: 230),
-                  Text("${state.quality} ${state.tAmount}"),
+                  Text("Quality- ${state.quality} \nAmount- ${state.tAmount}",style: TextStyle(color: colorScheme.onSecondary,fontSize: 22),),
                 ],
               ),
             );

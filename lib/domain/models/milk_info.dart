@@ -55,4 +55,15 @@ enum Time {
         throw Exception();
     }
   }
+
+  static String toStringCustom(Time time) {
+    switch (time) {
+      case Time.morning:
+        return "morning";
+      case Time.evening:
+        return "evening";
+      default:
+        throw Exception();
+    }
+  }
 }

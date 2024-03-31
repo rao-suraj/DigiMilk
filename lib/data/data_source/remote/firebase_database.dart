@@ -90,11 +90,13 @@ class FirebaseDatabaseService {
           .child(params.farmerId)
           .child('farmer_log')
           .child(DateFormat('yyyy-MM-dd').format(DateTime.now()))
+          .child(Time.toStringCustom(params.time))
           .update(params.toJson());
       await dbDairyRef
           .child(params.dairyId)
           .child('dairy_log')
           .child(DateFormat('yyyy-MM-dd').format(DateTime.now()))
+          .child(Time.toStringCustom(params.time))
           .update(params.toJson());
       return const Right(null);
     } catch (error) {
@@ -146,33 +148,53 @@ class FirebaseDatabaseService {
     }
   }
 
-  Future<Either<AppError, List<MilkInfo>>> getMilkData({required String id}) async {
+  Future<Either<AppError, List<MilkInfo>>> getMilkData(
+      {required String id}) async {
     final ref = _fbDatabase.ref('farmer').child(id).child('farmer_log');
 
     try {
       List<MilkInfo> list = [];
       await ref.get().then((value) {
         for (var item in value.children) {
-          // print(item.value);
-          final res = item.value as Map<dynamic, dynamic>;
-          final fff = MilkInfo(
-              dairyId: res['dairyId'],
-              farmerId: res['farmerId'],
-              ph: res['ph'],
-              temperature: res['temperature'],
-              fat: res['fat'],
-              colors: res['colors'],
-              quality: res['quality'],
-              time: Time.fromString(res['time']),
-              date: res['date'],
-              totAmount: res['totAmount'],
-              quantity: res['quantity']);
-          list.add(fff);
+          final timeVal = item.value as Map<dynamic, dynamic>;
+          if (timeVal["morning"] != null) {
+            final res = timeVal["morning"] as Map<dynamic, dynamic>;
+            final milkInfo = MilkInfo(
+                dairyId: res['dairyId'],
+                farmerId: res['farmerId'],
+                ph: res['ph'],
+                temperature: res['temperature'],
+                fat: res['fat'],
+                colors: res['colors'],
+                quality: res['quality'],
+                time: Time.fromString(res['time']),
+                date: res['date'],
+                totAmount: res['totAmount'],
+                quantity: res['quantity']);
+            list.add(milkInfo);
+          }
+           if (timeVal["evening"] != null) {
+            final res = timeVal["evening"] as Map<dynamic, dynamic>;
+            final milkInfo = MilkInfo(
+                dairyId: res['dairyId'],
+                farmerId: res['farmerId'],
+                ph: res['ph'],
+                temperature: res['temperature'],
+                fat: res['fat'],
+                colors: res['colors'],
+                quality: res['quality'],
+                time: Time.fromString(res['time']),
+                date: res['date'],
+                totAmount: res['totAmount'],
+                quantity: res['quantity']);
+            list.add(milkInfo);
+          }
         }
       });
-       return Right(list);
+      return Right(list);
     } catch (e) {
-      return Left(AppError(errorType: ErrorType.unknown, message: e.toString()));
+      return Left(
+          AppError(errorType: ErrorType.unknown, message: e.toString()));
     }
   }
 
@@ -184,25 +206,49 @@ class FirebaseDatabaseService {
       List<MilkInfo> list = [];
       await ref.get().then((value) {
         for (var item in value.children) {
-          final res = item.value as Map<dynamic, dynamic>;
-          list.add(MilkInfo(
-            dairyId: res['dairyId'],
-            farmerId: res['farmerId'],
-            ph: res['ph'],
-            temperature: res['temperature'],
-            fat: res['fat'],
-            colors: res['colors'],
-            quality: res['quality'],
-            time: Time.fromString(res['time']),
-            date: res['date'],
-            totAmount: res['totAmount'],
-            quantity: res['quantity'],
-          ));
+          final timeVal = item.value as Map<dynamic, dynamic>;
+
+          // if morning is present get its value
+          if (timeVal["morning"] != null) {
+            final res = timeVal["morning"] as Map<dynamic, dynamic>;
+            list.add(MilkInfo(
+              dairyId: res['dairyId'],
+              farmerId: res['farmerId'],
+              ph: res['ph'],
+              temperature: res['temperature'],
+              fat: res['fat'],
+              colors: res['colors'],
+              quality: res['quality'],
+              time: Time.fromString(res['time']),
+              date: res['date'],
+              totAmount: res['totAmount'],
+              quantity: res['quantity'],
+            ));
+          }
+
+          // if evening value if prisent get its value
+          if (timeVal["evening"] != null) {
+            final res = timeVal["evening"] as Map<dynamic, dynamic>;
+            list.add(MilkInfo(
+              dairyId: res['dairyId'],
+              farmerId: res['farmerId'],
+              ph: res['ph'],
+              temperature: res['temperature'],
+              fat: res['fat'],
+              colors: res['colors'],
+              quality: res['quality'],
+              time: Time.fromString(res['time']),
+              date: res['date'],
+              totAmount: res['totAmount'],
+              quantity: res['quantity'],
+            ));
+          }
         }
       });
       return Right(list);
     } catch (e) {
-      return Left(AppError(errorType: ErrorType.unknown, message: e.toString()));
+      return Left(
+          AppError(errorType: ErrorType.unknown, message: e.toString()));
     }
   }
 }
