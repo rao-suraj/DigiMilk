@@ -4,7 +4,7 @@ part 'get_quality_params.g.dart';
 
 @JsonSerializable()
 class GetQualityParams {
-  final int ph;
+  final double ph;
   final int temperature;
   final int fat;
   final int colors;

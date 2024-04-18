@@ -23,13 +23,17 @@ class GenerateBillCubit extends Cubit<GenerateBillState> {
   }
 
   Future<void> generateBill(
-      {required int ph,
+      {required double ph,
       required int color,
       required int fat,
       required int temp,
       required String farmerId,
       required String dairyId,
       required int quantity}) async {
+    print(ph);
+    print("Temp $temp");
+    print("pH $ph");
+
     int totAmount;
     String quality;
     emit(const GenerateBillLoading());
@@ -40,7 +44,7 @@ class GenerateBillCubit extends Cubit<GenerateBillState> {
     emit(response.fold((left) => GenerateBillError(left.message!), (right) {
       switch (right.grade) {
         case 0:
-          quality = "Bad";
+          quality = "Average";
           totAmount = 32 * quantity;
           break;
         case 1:
@@ -58,7 +62,7 @@ class GenerateBillCubit extends Cubit<GenerateBillState> {
           params: MilkInfo(
               dairyId: dairyId,
               farmerId: farmerId,
-              ph: ph,
+              ph: ph.toInt(),
               temperature: temp,
               fat: fat,
               colors: color,

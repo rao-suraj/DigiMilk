@@ -26,7 +26,7 @@ class DairyDetailsScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _DairyDetailsState extends State<DairyDetailsScreen> {
-  List<String> quality = ["Bad","Good","Great"];
+  List<String> quality = ["Average","Good","Great"];
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;

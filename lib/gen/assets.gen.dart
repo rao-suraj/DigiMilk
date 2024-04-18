@@ -39,6 +39,10 @@ class $AssetsImagesGen {
   AssetGenImage get addUser =>
       const AssetGenImage('assets/images/add_user.png');
 
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app_icon.png');
+
   /// File path: assets/images/bill.png
   AssetGenImage get bill => const AssetGenImage('assets/images/bill.png');
 
@@ -49,10 +53,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/generate_bill.svg
   SvgGenImage get generateBill =>
       const SvgGenImage('assets/images/generate_bill.svg');
-
-  /// File path: assets/images/generate_bill_new.svg
-  SvgGenImage get generateBillNew =>
-      const SvgGenImage('assets/images/generate_bill_new.svg');
 
   /// File path: assets/images/list.png
   AssetGenImage get list => const AssetGenImage('assets/images/list.png');
@@ -69,10 +69,10 @@ class $AssetsImagesGen {
         addFarmerPng,
         addFarmerSvg,
         addUser,
+        appIcon,
         bill,
         entrepreneur,
         generateBill,
-        generateBillNew,
         list,
         notes,
         welcomeBack

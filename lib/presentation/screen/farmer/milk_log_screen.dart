@@ -27,6 +27,7 @@ class MilkLogScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _MilkLogState extends State<MilkLogScreen> {
+  List<String> quality = ["Average","Good","Great"];
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -107,7 +108,7 @@ class _MilkLogState extends State<MilkLogScreen> {
                               FittedBox(
                                 fit: BoxFit.fitWidth,
                                 child: Text(
-                                  "Quality: ${data[index].quality}",
+                                  "Quality: ${quality[data[index].quality]}",
                                   style: GoogleFonts.openSans(
                                       textStyle: TextStyle(
                                           color: appTheme.colorScheme.onSecondary,

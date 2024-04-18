@@ -8,7 +8,7 @@ part of 'get_quality_params.dart';
 
 GetQualityParams _$GetQualityParamsFromJson(Map<String, dynamic> json) =>
     GetQualityParams(
-      ph: json['ph'] as int,
+      ph: (json['ph'] as num).toDouble(),
       temperature: json['temperature'] as int,
       fat: json['fat'] as int,
       colors: json['colors'] as int,

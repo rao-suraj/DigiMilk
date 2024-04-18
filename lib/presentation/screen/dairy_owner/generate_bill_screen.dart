@@ -44,7 +44,8 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (state is GenerateBillLoaded) {
-            final data = state.databaseEvent.snapshot.value;
+            final data =
+                state.databaseEvent.snapshot.value as Map<dynamic, dynamic>;
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -54,7 +55,8 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                     Assets.images.generateBill.svg(width: 230),
                     Text(
                       state.databaseEvent.snapshot.value.toString(),
-                      style: TextStyle(color: colorScheme.onSecondary,fontSize: 20),
+                      style: TextStyle(
+                          color: colorScheme.onSecondary, fontSize: 20),
                     ),
                     Column(
                       children: [
@@ -73,15 +75,21 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        final dairy= context.read<AuthCubit>().state.dairyInfo;
-                        context.read<GenerateBillCubit>().generateBill(
-                            ph: 8,
-                            color: 32,
-                            fat: 0,
-                            temp: 23,
-                            farmerId: idController.text,
-                            dairyId: dairy!.id!,
-                            quantity: int.parse(quantityController.text));
+                        print("TEmp ${data["temp"]}");
+                        try {
+                          final dairy =
+                              context.read<AuthCubit>().state.dairyInfo;
+                          context.read<GenerateBillCubit>().generateBill(
+                              ph: double.parse(data["ph"]),
+                              color: data["color"],
+                              fat: data["fat"],
+                              temp: data["temp"],
+                              farmerId: idController.text,
+                              dairyId: dairy!.id!,
+                              quantity: int.parse(quantityController.text));
+                        } catch (e) {
+                          print("THis is the exception $e");
+                        }
                       },
                       child: Container(
                         height: 60,
@@ -111,7 +119,11 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Assets.images.generateBill.svg(width: 230),
-                  Text("Quality- ${state.quality} \nAmount- ${state.tAmount}",style: TextStyle(color: colorScheme.onSecondary,fontSize: 22),),
+                  Text(
+                    "Quality- ${state.quality} \nAmount- ${state.tAmount}",
+                    style:
+                        TextStyle(color: colorScheme.onSecondary, fontSize: 22),
+                  ),
                 ],
               ),
             );
