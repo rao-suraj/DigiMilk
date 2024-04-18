@@ -44,6 +44,7 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (state is GenerateBillLoaded) {
+            final data = state.databaseEvent.snapshot.value;
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -53,7 +54,7 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                     Assets.images.generateBill.svg(width: 230),
                     Text(
                       state.databaseEvent.snapshot.value.toString(),
-                      style: TextStyle(color: colorScheme.onSecondary),
+                      style: TextStyle(color: colorScheme.onSecondary,fontSize: 20),
                     ),
                     Column(
                       children: [
