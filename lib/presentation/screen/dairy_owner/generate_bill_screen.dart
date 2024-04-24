@@ -4,6 +4,7 @@ import 'package:dhood_app/gen/assets.gen.dart';
 import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/cubit/generate_bill_cubit/genearte_bill_cubit.dart';
 import 'package:dhood_app/presentation/cubit/generate_bill_cubit/generate_bill_state.dart';
+import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -39,7 +40,17 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
         title: const Text("Generate Bill"),
       ),
       backgroundColor: colorScheme.background,
-      body: BlocBuilder<GenerateBillCubit, GenerateBillState>(
+      body: BlocConsumer<GenerateBillCubit, GenerateBillState>(
+        listener: (context, state) {
+          if (state is GenerateBillSuccess) {
+            context.replaceRoute(BillRoute(
+                dairyId: context.read<AuthCubit>().state.dairyInfo!.id!,
+                farmerId: idController.text.toString(),
+                quality: state.quality,
+                quantity: quantityController.text.toString(),
+                amount: state.tAmount));
+          }
+        },
         builder: (context, state) {
           if (state is GenerateBillLoading) {
             return const Center(
@@ -113,64 +124,6 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                     ),
                   ],
                 ),
-              ),
-            );
-          } else if (state is GenerateBillSuccess) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Assets.images.generateBill.svg(width: 230),
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "DairyId: ${context.read<AuthCubit>().state.dairyInfo!.id}",
-                          style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSecondary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                        Text(
-                          "FarmerId: ${idController.text.toString()}",
-                          style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSecondary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                        Text(
-                          "Quality : ${state.quality}",
-                          style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSecondary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                        Text(
-                          "Quantity : ${quantityController.text.toString()} L",
-                          style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSecondary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                        Text(
-                          "Amount : ${state.tAmount} Rs",
-                          style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSecondary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                      ]),
-                ],
               ),
             );
           } else {
