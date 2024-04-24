@@ -38,7 +38,7 @@ class FarmerDashboardState extends State<FarmerDashboardScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Johny s Family",
+                            "Farmer Dashboard",
                             style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                     color: appTheme.colorScheme.onSecondary,
