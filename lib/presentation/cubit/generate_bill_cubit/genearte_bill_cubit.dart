@@ -30,18 +30,21 @@ class GenerateBillCubit extends Cubit<GenerateBillState> {
       required String farmerId,
       required String dairyId,
       required int quantity}) async {
-    print(ph);
     print("Temp $temp");
     print("pH $ph");
+    print("fat $fat");
+    print("color $color");
 
     int totAmount;
     String quality;
     emit(const GenerateBillLoading());
     final response = await _databaseRepository.getQuality(
         params: GetQualityParams(
-            ph: ph, temperature: temp, fat: fat, colors: color));
+            ph: ph, temperature: temp, fat: fat, colour: color));
 
     emit(response.fold((left) => GenerateBillError(left.message!), (right) {
+      print("Grade ${right.grade}");
+      print(right.grade);
       switch (right.grade) {
         case 0:
           quality = "Average";

@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   final response = await getIt<IRemoteDatabaseRepository>()
                       .getQuality(
                           params: GetQualityParams(
-                              ph: 7, temperature: 35, fat: 1, colors: 255));
+                              ph: 7, temperature: 35, fat: 1, colour: 255));
 
                   response.fold((left) => print(left), (right) => print(right.grade));
 

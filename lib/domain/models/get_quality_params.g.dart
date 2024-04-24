@@ -11,7 +11,7 @@ GetQualityParams _$GetQualityParamsFromJson(Map<String, dynamic> json) =>
       ph: (json['ph'] as num).toDouble(),
       temperature: json['temperature'] as int,
       fat: json['fat'] as int,
-      colors: json['colors'] as int,
+      colour: json['colour'] as int,
     );
 
 Map<String, dynamic> _$GetQualityParamsToJson(GetQualityParams instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$GetQualityParamsToJson(GetQualityParams instance) =>
       'ph': instance.ph,
       'temperature': instance.temperature,
       'fat': instance.fat,
-      'colors': instance.colors,
+      'colour': instance.colour,
     };

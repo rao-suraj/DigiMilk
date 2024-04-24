@@ -6,7 +6,9 @@ import 'package:dhood_app/presentation/cubit/generate_bill_cubit/genearte_bill_c
 import 'package:dhood_app/presentation/cubit/generate_bill_cubit/generate_bill_state.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class GenereateBillScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -80,10 +82,10 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                           final dairy =
                               context.read<AuthCubit>().state.dairyInfo;
                           context.read<GenerateBillCubit>().generateBill(
-                              ph: double.parse(data["ph"]),
+                              ph: double.parse(data["ph"].toString()),
                               color: data["color"],
                               fat: data["fat"],
-                              temp: data["temp"],
+                              temp: int.parse(data["temp"].toString()),
                               farmerId: idController.text,
                               dairyId: dairy!.id!,
                               quantity: int.parse(quantityController.text));
@@ -119,11 +121,55 @@ class _GenereateBillScreenState extends State<GenereateBillScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Assets.images.generateBill.svg(width: 230),
-                  Text(
-                    "Quality- ${state.quality} \nAmount- ${state.tAmount}",
-                    style:
-                        TextStyle(color: colorScheme.onSecondary, fontSize: 22),
-                  ),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "DairyId: ${context.read<AuthCubit>().state.dairyInfo!.id}",
+                          style: GoogleFonts.openSans(
+                              textStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                        Text(
+                          "FarmerId: ${idController.text.toString()}",
+                          style: GoogleFonts.openSans(
+                              textStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                        Text(
+                          "Quality : ${state.quality}",
+                          style: GoogleFonts.openSans(
+                              textStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                        Text(
+                          "Quantity : ${quantityController.text.toString()} L",
+                          style: GoogleFonts.openSans(
+                              textStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                        Text(
+                          "Amount : ${state.tAmount} Rs",
+                          style: GoogleFonts.openSans(
+                              textStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                      ]),
                 ],
               ),
             );

@@ -7,8 +7,8 @@ class GetQualityParams {
   final double ph;
   final int temperature;
   final int fat;
-  final int colors;
-  GetQualityParams({required this.ph,required this.temperature,required this.fat,required this.colors});
+  final int colour;
+  GetQualityParams({required this.ph,required this.temperature,required this.fat,required this.colour});
 
   factory GetQualityParams.fromJson(Map<String, dynamic> json) =>
       _$GetQualityParamsFromJson(json);
