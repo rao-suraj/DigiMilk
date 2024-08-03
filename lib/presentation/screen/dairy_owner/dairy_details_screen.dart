@@ -3,7 +3,6 @@ import 'package:dhood_app/di/get_it.dart';
 import 'package:dhood_app/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:dhood_app/presentation/cubit/dairy_details_cubit/dairy_details_cubit.dart';
 import 'package:dhood_app/presentation/cubit/dairy_details_cubit/dairy_detials_state.dart';
-import 'package:dhood_app/presentation/cubit/farmer_details_cubit/farmer_details_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
