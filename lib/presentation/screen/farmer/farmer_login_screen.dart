@@ -101,8 +101,10 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
                               await context
                                   .read<AuthCubit>()
                                   .loginFarmer(farmerInfo: state.farmerInfo);
-                              context.router
-                                  .replaceAll([const FarmerDashboardRoute()]);
+                              context.mounted
+                                  ? context.router.replaceAll(
+                                      [const FarmerDashboardRoute()])
+                                  : null;
                             }
                           },
                           builder: (context, state) {
@@ -157,7 +159,9 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
                         //     SquareTile(imagePath: 'assets/icons/apple.png')
                         //   ],
                         // ),
-                        const SizedBox(height: 90,)
+                        const SizedBox(
+                          height: 90,
+                        )
                       ],
                     ),
                   ),
