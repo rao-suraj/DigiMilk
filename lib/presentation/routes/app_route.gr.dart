@@ -21,6 +21,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const AddFarmerScreen()),
       );
     },
+    BillRoute.name: (routeData) {
+      final args = routeData.argsAs<BillRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: BillScreen(
+          key: args.key,
+          dairyId: args.dairyId,
+          farmerId: args.farmerId,
+          quality: args.quality,
+          quantity: args.quantity,
+          amount: args.amount,
+        ),
+      );
+    },
     DairyDashboardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -106,6 +120,63 @@ class AddFarmerRoute extends PageRouteInfo<void> {
   static const String name = 'AddFarmerRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BillScreen]
+class BillRoute extends PageRouteInfo<BillRouteArgs> {
+  BillRoute({
+    Key? key,
+    required String dairyId,
+    required String farmerId,
+    required String quality,
+    required String quantity,
+    required int amount,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BillRoute.name,
+          args: BillRouteArgs(
+            key: key,
+            dairyId: dairyId,
+            farmerId: farmerId,
+            quality: quality,
+            quantity: quantity,
+            amount: amount,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BillRoute';
+
+  static const PageInfo<BillRouteArgs> page = PageInfo<BillRouteArgs>(name);
+}
+
+class BillRouteArgs {
+  const BillRouteArgs({
+    this.key,
+    required this.dairyId,
+    required this.farmerId,
+    required this.quality,
+    required this.quantity,
+    required this.amount,
+  });
+
+  final Key? key;
+
+  final String dairyId;
+
+  final String farmerId;
+
+  final String quality;
+
+  final String quantity;
+
+  final int amount;
+
+  @override
+  String toString() {
+    return 'BillRouteArgs{key: $key, dairyId: $dairyId, farmerId: $farmerId, quality: $quality, quantity: $quantity, amount: $amount}';
+  }
 }
 
 /// generated route for
