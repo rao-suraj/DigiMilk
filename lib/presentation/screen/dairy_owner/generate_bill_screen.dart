@@ -7,9 +7,7 @@ import 'package:dhood_app/presentation/cubit/generate_bill_cubit/generate_bill_s
 import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class GenereateBillScreen extends StatefulWidget implements AutoRouteWrapper {

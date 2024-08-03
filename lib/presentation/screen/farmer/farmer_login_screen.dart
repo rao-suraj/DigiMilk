@@ -6,7 +6,6 @@ import 'package:dhood_app/presentation/cubit/farmer_login_cubit/farmer_login_sta
 import 'package:dhood_app/presentation/routes/app_route.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_button.dart';
 import 'package:dhood_app/presentation/screen/widget/custom_textfield.dart';
-import 'package:dhood_app/presentation/screen/widget/square_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -148,16 +147,17 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
                           ],
                         ),
                         // google + apple sign in buttons
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // google button
-                            SquareTile(imagePath: 'assets/icons/google.png'),
-                            SizedBox(width: 25),
-                            // apple button
-                            SquareTile(imagePath: 'assets/icons/apple.png')
-                          ],
-                        ),
+                        // const Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     // google button
+                        //     SquareTile(imagePath: 'assets/icons/google.png'),
+                        //     SizedBox(width: 25),
+                        //     // apple button
+                        //     SquareTile(imagePath: 'assets/icons/apple.png')
+                        //   ],
+                        // ),
+                        const SizedBox(height: 90,)
                       ],
                     ),
                   ),
@@ -167,23 +167,24 @@ class FarmerLoginScreen extends StatelessWidget implements AutoRouteWrapper {
           ),
           Expanded(
             flex: 6,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Not a member?',
-                  style: TextStyle(color: appTheme.colorScheme.onSecondary),
-                ),
-                const SizedBox(width: 4),
-                const Text(
-                  'Register now',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
+            child: Container(),
+            // child: Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       'Not a member?',
+            //       style: TextStyle(color: appTheme.colorScheme.onSecondary),
+            //     ),
+            //     const SizedBox(width: 4),
+            //     const Text(
+            //       'Register now',
+            //       style: TextStyle(
+            //         color: Colors.blue,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           )
         ],
       ),
