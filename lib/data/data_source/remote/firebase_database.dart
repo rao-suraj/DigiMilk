@@ -155,8 +155,10 @@ class FirebaseDatabaseService {
     try {
       List<MilkInfo> list = [];
       await ref.get().then((value) {
+        // iterate through each entry in farmer_log
         for (var item in value.children) {
           final timeVal = item.value as Map<dynamic, dynamic>;
+          // if morning value is present get that value
           if (timeVal["morning"] != null) {
             final res = timeVal["morning"] as Map<dynamic, dynamic>;
             final milkInfo = MilkInfo(
@@ -173,6 +175,7 @@ class FirebaseDatabaseService {
                 quantity: res['quantity']);
             list.add(milkInfo);
           }
+          // if evening value is present get that value
            if (timeVal["evening"] != null) {
             final res = timeVal["evening"] as Map<dynamic, dynamic>;
             final milkInfo = MilkInfo(
